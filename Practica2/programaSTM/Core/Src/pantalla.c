@@ -40,9 +40,9 @@ void setvisiblebBoton(uint8_t Vis, TsBoton * botonReset)
 	else
 	{
 		intercambiaBuffersLCD(botonReset->pantallaLCD);
-				dibujaImagen(botonReset->x, botonReset->y, 	botonReset->ancho,botonReset->alto,botonReset->imagen,0,0,0,botonReset->pantallaLCD);
-				intercambiaBuffersLCD(botonReset->pantallaLCD);
-				dibujaImagen(botonReset->x, botonReset->y, 	botonReset->ancho,botonReset->alto,botonReset->imagen,0,0,0,botonReset->pantallaLCD);
+		dibujaImagen(botonReset->x, botonReset->y, 	botonReset->ancho,botonReset->alto,botonReset->imagen,0,0,0,botonReset->pantallaLCD);
+		intercambiaBuffersLCD(botonReset->pantallaLCD);
+		dibujaImagen(botonReset->x, botonReset->y, 	botonReset->ancho,botonReset->alto,botonReset->imagen,0,0,0,botonReset->pantallaLCD);
 	}
 
 }
@@ -73,9 +73,9 @@ void setHabilitacionBoton(uint8_t En, TsBoton * botonReset)
 		else
 		{
 			intercambiaBuffersLCD(botonReset->pantallaLCD);
-					dibujaImagen(botonReset->x, botonReset->y, 	botonReset->ancho,botonReset->alto,botonReset->imagen,0,0,0,botonReset->pantallaLCD);
-					intercambiaBuffersLCD(botonReset->pantallaLCD);
-					dibujaImagen(botonReset->x, botonReset->y, 	botonReset->ancho,botonReset->alto,botonReset->imagen,0,0,0,botonReset->pantallaLCD);
+			dibujaImagen(botonReset->x, botonReset->y, 	botonReset->ancho,botonReset->alto,botonReset->imagen,0,0,0,botonReset->pantallaLCD);
+			intercambiaBuffersLCD(botonReset->pantallaLCD);
+			dibujaImagen(botonReset->x, botonReset->y, 	botonReset->ancho,botonReset->alto,botonReset->imagen,0,0,0,botonReset->pantallaLCD);
 		}
 }
 void atiendeBoton(uint16_t x,uint16_t y, uint16_t pulsada, TsBoton * botonReset)

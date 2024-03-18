@@ -1020,8 +1020,6 @@ void fTareaPantalla(void *argument)
 void temporizadorTick(void *argument)
 {
   /* USER CODE BEGIN temporizadorTick */
-double Kpp,Kdd,Kii,error;
-
 
 cntTime++;
 if (cntTime>ciclo) //la placa peltier solo trabaja parte del ciclo
@@ -1037,18 +1035,11 @@ if(cntTs==0)
 	{
 	cntTs=Ts;
 	osSemaphoreAcquire(semaforoContadorHandle,osWaitForever);
-	/*Kpp=Kp;
-	Kdd=Kd;
-	Kii=Ki;*/
-	//Consigna=Consigna;
 	osSemaphoreRelease(semaforoContadorHandle);
-	/*char mat[10];
-	sprintf(mat, "In=%d",medida);
-	dibujaCadenaCaracteresAlpha(70, 30, mat, &juegoConsolas9x18, 0, 200, 0, &pantallaLCD);*/
 	HAL_ADC_Start(&hadc1); //inicio conversión
-	HAL_ADC_PollForConversion(&hadc1,100);
-	medida=HAL_ADC_GetValue(&hadc1);
-	medida=medida*330/4096/3;
+	HAL_ADC_PollForConversion(&hadc1,100); // Espera fin de conversión con un timeout
+	medida=HAL_ADC_GetValue(&hadc1); // Recoge los 12 bits resultado de la conversión
+	medida=medida*330/4096; //medida*(Vmax/sensibilidad sesnor)/2^nbits
 	HAL_ADC_Stop(&hadc1); //fin conversión
 
 	error=Consigna-medida; //diferencia entre la temperatura consigna y la real
@@ -1068,13 +1059,13 @@ if(cntTs==0)
 		HAL_GPIO_WritePin(GPIOE,GPIO_PIN_2,GPIO_PIN_SET);
 		HAL_GPIO_WritePin(GPIOE,GPIO_PIN_3,GPIO_PIN_SET);
 	}
-	if (actua>100)
+	if (actua>100) //si la actuación es mayor de 100 calentará el 100% del ciclo
 		actua=100;
-	if (actua<0)
-		abs=-actua;
-	if (actua <-100)
+	if (actua <-100) //si la actuación es menor de -100 enfriará el 100% del ciclo
 		actua=-100;
-	ciclo=(int)abs;
+	if (actua<0) //si la actuación es negativa la vuelve positiva
+		actua=-actua;
+	ciclo=(int)actua;
 	}
 
 //-------------------------------------------------------------
@@ -1083,7 +1074,6 @@ if (cntTimer==0)
 	{
 	char cadena[20];
 	cntTimer=(cntTs)+espera;
-	//sprintf(cadena,"%d %d %d\r\n",(int)Consigna,(int)actua,(int)medida);
 	sprintf(cadena,"%d %d %d %d %d %d\r\n",(int)Consigna,(int)actua,(int)medida,(int)Kp,(int)Kd,(int)Ki);
 
 	if (HAL_UART_Transmit(&huart1,(uint8_t *) cadena,strlen(cadena),5000))
