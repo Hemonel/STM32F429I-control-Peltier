@@ -1,0 +1,11 @@
+../Core/Src/pantalla.c:8:6:inicializaPantalla2Buffers	40	static
+../Core/Src/pantalla.c:39:6:intercambiaBuffersLCD	16	static
+../Core/Src/pantalla.c:55:6:dibujaRectangulo	32	static
+../Core/Src/pantalla.c:75:6:inicializaJuegoCaracteres	16	static
+../Core/Src/pantalla.c:94:6:dibujaCaracter	48	static
+../Core/Src/pantalla.c:127:6:dibujaCadenaCaracteres	40	static
+../Core/Src/pantalla.c:204:6:dibujaPunto	32	static
+../Core/Src/pantalla.c:215:6:dibujaLinea	48	static
+../Core/Src/pantalla.c:234:6:dibujaPuntosCirculo	24	static
+../Core/Src/pantalla.c:248:6:dibujaCirculo	48	static
+../Core/Src/pantalla.c:267:6:dibujaImagen	40	static
